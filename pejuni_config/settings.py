@@ -113,18 +113,21 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = get_env('STATIC_URL', 'static/')
+# In your settings.py, add these lines:
 
-# Handle the STATICFILES_DIRS path
-staticfiles_dir_path = get_env('STATICFILES_DIRS_PATH', '../pejuni.com')
-if staticfiles_dir_path:
-    STATICFILES_DIRS = [
-        BASE_DIR.parent / staticfiles_dir_path if not staticfiles_dir_path.startswith('/') else Path(staticfiles_dir_path)
-    ]
-else:
-    STATICFILES_DIRS = []
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = 'static/'
 
-MEDIA_URL = get_env('MEDIA_URL', 'media/')
+# Directory where static files will be collected
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Additional directories for static files
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+# Media files
+MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
