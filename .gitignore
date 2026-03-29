@@ -41,3 +41,9 @@ build/
 *.pem
 *.key
 *.crt
+
+# Deployment
+.env.production
+*.pid
+logs/
+tmp/
