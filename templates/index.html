@@ -1,0 +1,409 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pejuni is a leading provider of specialized technical services in the global mining industry, offering expert guidance in geotechnical modeling, pit design, and foundation engineering.">
+    <title>Pejuni - Geotechnical Expertise</title>
+    <!-- Premium Fonts: Montserrat for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style4.css' %}">
+</head>
+<body>
+
+    <!-- Transparent to Solid Header -->
+    <header class="header4" id="mainHeader">
+        <div class="nav-container4">
+            <a href="#" class="logo-link"><img src="{% static 'pejunlogo.png' %}" alt="Pejuni Logo" class="brand-logo4"></a>
+            <nav class="nav-menu4" id="navMenu">
+                <ul>
+                    <li><a href="#expertise" class="nav-link-item">Expertise</a></li>
+                    <li><a href="#company" class="nav-link-item">Company</a></li>
+                    <li><a href="#projects" class="nav-link-item">Projects</a></li>
+                    <li><a href="https://pejuni.com/PEJUNI%20company%20profile.pdf" target="_blank" class="nav-link-item">Profile</a></li>
+                </ul>
+                <a href="#contact" class="btn4 nav-link-item">Contact Us</a>
+            </nav>
+            <div class="mobile-toggle4" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Parallax Hero -->
+    <section class="hero-parallax">
+        <div class="hero-bg-img" style="background-image: url('{% static 'gen_hero_rig_1774700954497.png' %}');"></div>
+        <div class="hero-gradient-overlay"></div>
+        <div class="hero-content4 container4 reveal-up">
+            <h5 class="hero-kicker">MINING & GEOTECHNICAL CONSULTING</h5>
+            <h1 class="hero-title4">Engineering<br>Operational Certainty.</h1>
+            <p class="hero-p4">We deliver practical, highly-specialized geotechnical solutions tailored to your individual operational and risk profile across the world's most demanding sites.</p>
+            <div class="hero-actions4">
+                <a href="#expertise" class="btn4 btn4-primary">Discover Our Expertise</a>
+            </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div class="scroll-down-indicator">
+            <span>Scroll</span>
+            <div class="mouse-icon"></div>
+        </div>
+    </section>
+
+    <!-- Introduction Statement (Massive White Space) -->
+    <section class="intro-statement">
+        <div class="container4 reveal-up">
+            <h2 class="statement-text">Unlocking the potential of mining projects with <span class="text-gold">unparalleled expertise</span> and relentless innovation. Pejuni is your strategic partner in subsurface risk management.</h2>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us-area">
+        <div class="container4 reveal-up">
+            <div class="why-grid4">
+                <div class="why-title">
+                    <h6 class="kicker-heading">THE PEJUNI ADVANTAGE</h6>
+                    <h2 class="main-heading">Why Choose Us.</h2>
+                    <p style="font-size: 18px; line-height: 1.8; margin-top: 30px; padding-right: 40px;">When you choose Pejuni, you are selecting a trusted partner that combines specialized expertise, advanced technologies, and an unwavering commitment to safety. We increase the net value of your open-pit or underground project through innovative engineering solutions.</p>
+                </div>
+                <div class="why-list">
+                    <div class="why-item">
+                        <div class="why-icon">01</div>
+                        <div>
+                            <h4>Expertise & Specialization</h4>
+                            <p>We provide precise linear and non-linear numerical models for complex extraction ratios.</p>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">02</div>
+                        <div>
+                            <h4>Advanced Technologies & Tools</h4>
+                            <p>Deploying state-of-the-art monitoring and software systems to ensure stability.</p>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">03</div>
+                        <div>
+                            <h4>Global Experience, Local Context</h4>
+                            <p>Proven across Tanzania, Australia, and the DR Congo's most challenging rock masses.</p>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">04</div>
+                        <div>
+                            <h4>Safety & Sustainability</h4>
+                            <p>Building exact hazard mitigation plans to definitively protect active operational pits.</p>
+                        </div>
+                    </div>
+                    <div class="why-item">
+                        <div class="why-icon">05</div>
+                        <div>
+                            <h4>Client-Centric Collaboration</h4>
+                            <p>We work directly alongside your on-site engineering teams as long-term strategic partners.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section (Staggered Layout) -->
+    <section id="expertise" class="expertise-area bg-light-gray">
+        <div class="container4">
+            <div class="section-title-wrap reveal-up">
+                <h6 class="kicker-heading">WHAT WE DO</h6>
+                <h2 class="main-heading">Core Capabilities.</h2>
+            </div>
+
+            {% for service in services %}
+            <!-- Staggered Block -->
+            <div class="staggered-block reveal-up {% if forloop.counter|divisibleby:2 %}st-reverse{% endif %}">
+                <div class="st-img">
+                    {% if service.image %}<img src="{{ service.image.url }}" alt="{{ service.title }}">{% endif %}
+                </div>
+                <div class="st-text">
+                    <div class="st-num">0{{ forloop.counter }}</div>
+                    <h3>{{ service.title }}</h3>
+                    <p>{{ service.description }}</p>
+                    <a href="#" class="arrow-link">Explore Solutions <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+            {% empty %}
+            <p>No services currently configured.</p>
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <!-- Parallax Stat Banner -->
+    <section class="stat-parallax">
+        <div class="stat-bg" style="background-image: url('{% static 'hero.png' %}');"></div>
+        <div class="stat-overlay"></div>
+        <div class="container4 stat-flex reveal-up">
+            <div class="stat-box4">
+                <div class="stat-value">200<span class="gold-plus">+</span></div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-box4">
+                <div class="stat-value">50<span class="gold-plus">+</span></div>
+                <div class="stat-label">Expert Engineers</div>
+            </div>
+            <div class="stat-box4">
+                <div class="stat-value">15<span class="gold-plus">Y</span></div>
+                <div class="stat-label">Years of Authority</div>
+            </div>
+            <div class="stat-box4">
+                <div class="stat-value">100<span class="gold-plus">%</span></div>
+                <div class="stat-label">Safety Record</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corporate About Profile -->
+    <section id="company" class="company-profile">
+        <div class="container4">
+            <div class="profile-grid">
+                <div class="profile-text reveal-up">
+                    <h6 class="kicker-heading">THE COMPANY</h6>
+                    <h2 class="main-heading">A Leading Partner in the Global Mining Industry.</h2>
+                    <p>Pejuni is a dominant provider of specialized technical services in the mining industry. Based in Mwanza, Tanzania with active operations spanning across Australia, DR Congo, Ghana, and South Africa.</p>
+                    <p>With an uncompromising commitment to technical expertise and collaborative engineering, we utilize cutting-edge tools and advanced modeling techniques to optimize incredibly complex mining plans and definitively assess ground stability.</p>
+                    <div class="profile-btn-group">
+                        <a href="https://pejuni.com/PEJUNI%20company%20profile.pdf" target="_blank" class="btn4 btn4-dark">Download Profile PDF</a>
+                    </div>
+                </div>
+                <div class="profile-image reveal-up">
+                    <img src="{% static 'choose-img.jpg' %}" alt="Corporate Leadership">
+                    <div class="gold-accent-box"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Reach & Projects -->
+    <section id="projects" class="projects-area bg-light-gray">
+        <div class="container4">
+            <div class="section-title-wrap reveal-up">
+                <h6 class="kicker-heading">WHERE WE WORK</h6>
+                <h2 class="main-heading">Locations & Projects.</h2>
+            </div>
+
+            <div class="location-tags4 reveal-up text-center mb-60">
+                <span class="tag4">Tanzania</span>
+                <span class="tag4">Australia</span>
+                <span class="tag4">DR Congo</span>
+                <span class="tag4">Ghana</span>
+                <span class="tag4">South Africa</span>
+            </div>
+
+            <div class="projects-grid4 mt-60 reveal-up">
+                {% for project in projects %}
+                <div class="project-box4">
+                    {% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}">{% endif %}
+                    <div class="pb-content4">
+                        <h4>{{ project.title }}</h4>
+                        <p>{{ project.description }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No projects currently configured.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted Clients Sector -->
+    <section class="clients-area">
+        <div class="container4 text-center reveal-up">
+            <h6 class="kicker-heading mb-15">OUR NETWORK</h6>
+            <h2 class="main-heading mb-60">Trusted Partners.</h2>
+            
+            <div class="clients-flex4">
+                {% for partner in partners %}
+                <div class="client-logo4"><img src="https://www.google.com/s2/favicons?domain={{ partner.logo_domain|urlencode }}&sz=128" alt="{{ partner.name }}"></div>
+                {% empty %}
+                <p>No partners configured.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="team-area">
+        <div class="container4 text-center">
+            <h6 class="kicker-heading reveal-up mb-15">LEADERSHIP</h6>
+            <h2 class="main-heading reveal-up mb-60">Meet the Team.</h2>
+            
+            <div class="team-grid4 reveal-up">
+                {% for member in team_members %}
+                <div class="team-card4">
+                    <div class="team-img4">{% if member.image %}<img src="{{ member.image.url }}" alt="{{ member.name }}">{% endif %}</div>
+                    <div class="team-info4">
+                        <h4>{{ member.name }}</h4>
+                        <p class="team-role4">{{ member.role }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No team members listed.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Testimonials -->
+    <section class="testimonials-area bg-light-gray">
+        <div class="container4 text-center">
+            <h6 class="kicker-heading reveal-up mb-15">WHAT THEY SAY</h6>
+            <h2 class="main-heading reveal-up mb-60">Client Endorsements.</h2>
+
+            <div class="testimonials-grid4 reveal-up">
+                {% for testimonial in testimonials %}
+                <div class="testimonial-card4">
+                    <div class="star-rating4">{% for i in "12345"|make_list %}{% if forloop.counter <= testimonial.stars %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}</div>
+                    <p class="test-body4">"{{ testimonial.quote }}"</p>
+                    <h5 class="test-author4">- {{ testimonial.author }}</h5>
+                </div>
+                {% empty %}
+                <p>No endorsements available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- News & Insights -->
+    <section class="news-area">
+        <div class="container4">
+            <div class="section-title-wrap text-center reveal-up">
+                <h6 class="kicker-heading">STAY UPDATED</h6>
+                <h2 class="main-heading">Latest Insights.</h2>
+            </div>
+            
+            <div class="news-grid4 reveal-up mt-60">
+                {% for article in articles %}
+                <div class="news-card4">
+                    <div class="news-img4">{% if article.image %}<img src="{{ article.image.url }}" alt="{{ article.title }}">{% endif %}</div>
+                    <div class="news-content4">
+                        <span class="news-date4">{{ article.date|date:"M d, Y" }}</span>
+                        <h4>{{ article.title }}</h4>
+                        <a href="{{ article.link|default:'#' }}" class="news-link4">Review Analysis <span class="arrow">&rarr;</span></a>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No recent news articles.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer id="contact" class="footer-ultra">
+        <div class="container4">
+            <div class="cta-massive reveal-up">
+                <h2>Ready to discuss your next project?</h2>
+                <div class="cta-buttons">
+                    <a href="mailto:admin@pejuni.com" class="btn4 btn4-primary">Email Our Team</a>
+                    <a href="https://wa.link/c1wql7" class="btn4 btn4-outline">Chat on WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="footer-grid4">
+                <div class="fg-col fg-brand">
+                    <img src="{% static 'pejunlogo.png' %}" alt="Pejuni Logo">
+                    <p>Engineering stability. Ensuring operational excellence. Pejuni Resources.</p>
+                </div>
+                <div class="fg-col">
+                    <h4 class="fg-title">Global Offices</h4>
+                    <ul class="fg-list">
+                        <li><strong>Tanzania (HQ)</strong><br>Mwanza, Tanzania<br>+255 759 199 623</li>
+                        <li class="li-mt"><strong>Australia</strong><br>+61 470 578 151</li>
+                    </ul>
+                </div>
+                <div class="fg-col">
+                    <h4 class="fg-title">Expertise</h4>
+                    <ul class="fg-list links-list">
+                        <li><a href="#">Geotechnical Data</a></li>
+                        <li><a href="#">Slope Stability</a></li>
+                        <li><a href="#">Soil Lab Testing</a></li>
+                        <li><a href="#">Mentorship & Training</a></li>
+                    </ul>
+                </div>
+                <div class="fg-col">
+                    <h4 class="fg-title">Connect</h4>
+                    <ul class="fg-list links-list">
+                        <li><a href="mailto:admin@pejuni.com">admin@pejuni.com</a></li>
+                        <li><a href="mailto:info@pejuni.com">info@pejuni.com</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-copy">
+                &copy; 2026 Pejuni Resources. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.link/c1wql7" class="whatsapp-float bg-green-pulse" target="_blank" aria-label="Chat with us on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="30" fill="currentColor">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+        </svg>
+    </a>
+
+    <!-- Scroll Reveal Logic and Sticky Header -->
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link-item');
+
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            header.classList.add('scrolled'); // Ensure header is solid when menu is open
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
