@@ -24,10 +24,10 @@ venv.bak/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-/staticfiles/
-/static/
-/media/
-media/
+# /staticfiles/
+# /static/
+# /media/
+# media/
 
 # IDE
 .vscode/
