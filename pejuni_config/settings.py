@@ -10,26 +10,29 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load environment variables
+env_file = os.getenv('DJANGO_ENV_FILE', '.env.development')
+if (BASE_DIR / env_file).exists():
+    load_dotenv(BASE_DIR / env_file)
+    print(f"Loaded environment from {env_file}")
+
+# Helper function to get env variables
+def get_env(key, default=None):
+    return os.getenv(key, default)
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qf&0g)@ggv31k@yw0&#+g(4oktfjquex%mly!984+8_98usj+v'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+SECRET_KEY = get_env('DJANGO_SECRET_KEY', 'django-insecure-default-key')
+DEBUG = get_env('DJANGO_DEBUG', 'True') == 'True'
+ALLOWED_HOSTS = [host.strip() for host in get_env('DJANGO_ALLOWED_HOSTS', '').split(',') if host.strip()]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -75,22 +78,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pejuni_config.wsgi.application'
 
-
+# Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pejuni_db',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': get_env('DB_ENGINE', 'django.db.backends.postgresql'),
+        'NAME': get_env('DB_NAME', 'pejuni_db'),
+        'USER': get_env('DB_USER', ''),
+        'PASSWORD': get_env('DB_PASSWORD', ''),
+        'HOST': get_env('DB_HOST', 'localhost'),
+        'PORT': get_env('DB_PORT', '5432'),
     }
 }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -106,26 +106,26 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/6.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
+STATIC_URL = get_env('STATIC_URL', 'static/')
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR.parent / 'pejuni.com'
-]
+# Handle the STATICFILES_DIRS path
+staticfiles_dir_path = get_env('STATICFILES_DIRS_PATH', '../pejuni.com')
+if staticfiles_dir_path:
+    STATICFILES_DIRS = [
+        BASE_DIR.parent / staticfiles_dir_path if not staticfiles_dir_path.startswith('/') else Path(staticfiles_dir_path)
+    ]
+else:
+    STATICFILES_DIRS = []
 
-MEDIA_URL = 'media/'
+MEDIA_URL = get_env('MEDIA_URL', 'media/')
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Default primary key field type
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
