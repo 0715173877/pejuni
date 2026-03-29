@@ -132,6 +132,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 # CSRF Settings
 CSRF_TRUSTED_ORIGINS = [
     'http://31.220.75.145:8002',
