@@ -63,3 +63,4 @@ logs/
 
 # Local configuration
 *.local
+pejuni_config/settings.py
