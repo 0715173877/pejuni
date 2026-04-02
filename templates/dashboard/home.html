@@ -1,0 +1,27 @@
+{% extends "dashboard/base_dash.html" %}
+{% block page_title %}Dashboard Overview{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">System Overview</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+        <div style="padding: 25px; border-radius: 6px; background-color: #f8fafc; border-left: 4px solid var(--c-gold);">
+            <div style="font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase;">Total Projects</div>
+            <div style="font-size: 36px; font-weight: 700; color: var(--c-primary); margin-top: 10px;">{{ projects_count }}</div>
+        </div>
+        <div style="padding: 25px; border-radius: 6px; background-color: #f8fafc; border-left: 4px solid var(--c-gold);">
+            <div style="font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase;">Total Services</div>
+            <div style="font-size: 36px; font-weight: 700; color: var(--c-primary); margin-top: 10px;">{{ services_count }}</div>
+        </div>
+        <div style="padding: 25px; border-radius: 6px; background-color: #f8fafc; border-left: 4px solid var(--c-gold);">
+            <div style="font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase;">Team Members</div>
+            <div style="font-size: 36px; font-weight: 700; color: var(--c-primary); margin-top: 10px;">{{ team_count }}</div>
+        </div>
+        <div style="padding: 25px; border-radius: 6px; background-color: #f8fafc; border-left: 4px solid var(--c-gold);">
+            <div style="font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase;">News Articles</div>
+            <div style="font-size: 36px; font-weight: 700; color: var(--c-primary); margin-top: 10px;">{{ news_count }}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

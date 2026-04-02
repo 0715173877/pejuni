@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="page-header" style="background-color: var(--c-primary); padding: 160px 0 80px; text-align: center;">
+    <div class="container4">
+        <h1 style="color: white; font-size: 50px;">Latest Insights</h1>
+    </div>
+</section>
+
+<section class="news-area bg-light-gray" style="padding: 80px 0;">
+    <div class="container4">
+        <div class="news-grid4">
+            {% for article in articles %}
+            <div class="news-card4" style="transform: translateY(0); opacity: 1;">
+                <a href="{% url 'news:detail' article.pk %}">
+                    <div class="news-img4">{% if article.image %}<img src="{{ article.image.url }}" alt="{{ article.title }}">{% endif %}</div>
+                </a>
+                <div class="news-content4">
+                    <span class="news-date4">{{ article.date|date:"M d, Y" }}</span>
+                    <h4>{{ article.title|truncatewords:8 }}</h4>
+                    <a href="{% url 'news:detail' article.pk %}" class="news-link4">Review Analysis <span class="arrow">&rarr;</span></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

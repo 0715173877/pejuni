@@ -32,3 +32,27 @@ class Testimonial(AuditModel):
 
     def __str__(self):
         return self.author
+
+class Statistic(AuditModel):
+    value_number = models.CharField(max_length=50)
+    value_suffix = models.CharField(max_length=10, blank=True, null=True, help_text="e.g. +, Y, %")
+    label = models.CharField(max_length=100)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f"{self.value_number}{self.value_suffix or ''} {self.label}"
+
+class Advantage(AuditModel):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    icon_number = models.CharField(max_length=10, default="01")
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title

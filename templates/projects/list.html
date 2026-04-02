@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="page-header" style="background-color: var(--c-primary); padding: 160px 0 80px; text-align: center;">
+    <div class="container4">
+        <h1 style="color: white; font-size: 50px;">Global Operations</h1>
+    </div>
+</section>
+
+<section class="projects-area bg-light-gray" style="padding: 80px 0;">
+    <div class="container4">
+        <div class="projects-grid4">
+            {% for project in projects %}
+            <div class="project-box4" style="transform: translateY(0); opacity: 1;">
+                <a href="{% url 'projects:detail' project.pk %}">
+                    {% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}">{% endif %}
+                </a>
+                <div class="pb-content4">
+                    <h4>{{ project.title }}</h4>
+                    {% if project.country %}<p style="color: var(--c-gold); font-size: 13px; font-weight: 600; text-transform: uppercase; margin-bottom: 5px;">{{ project.country }}</p>{% endif %}
+                    <p>{{ project.description|truncatewords:20 }}</p>
+                    <a href="{% url 'projects:detail' project.pk %}" style="display: inline-block; margin-top: 15px; color: var(--c-primary); font-weight: 600; text-decoration: underline;">View Case Study</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

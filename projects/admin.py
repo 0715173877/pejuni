@@ -4,5 +4,6 @@ from core.admin import AuditAdminMixin
 
 @admin.register(Project)
 class ProjectAdmin(AuditAdminMixin, admin.ModelAdmin):
-    list_display = ('title', 'order', 'updated_at', 'updated_by')
-    ordering = ('order',)
+    list_display = ('title', 'country', 'order', 'updated_at', 'updated_by')
+    list_filter = ('country',)
+    search_fields = ('title', 'description', 'detailed_scope', 'country')

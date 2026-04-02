@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pejuni CMS Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --c-primary: #122137;
+            --c-secondary: #1a304e;
+            --c-gold: #e1ab36;
+            --c-white: #ffffff;
+            --c-bg: #f4f6f8;
+            --c-text: #334155;
+            --c-border: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--c-bg); color: var(--c-text); display: flex; min-height: 100vh; }
+        
+        .sidebar { width: 280px; background-color: var(--c-primary); color: white; display: flex; flex-direction: column; }
+        .sidebar-header { padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .sidebar-header h2 { font-family: 'Montserrat', sans-serif; letter-spacing: 2px; color: var(--c-gold); font-size: 24px; }
+        .sidebar-nav { padding: 30px 0; flex-grow: 1; }
+        .nav-link { display: block; padding: 15px 30px; color: rgba(255,255,255,0.7); text-decoration: none; font-weight: 500; transition: all 0.3s; }
+        .nav-link:hover, .nav-link.active { background-color: var(--c-secondary); color: var(--c-gold); border-left: 4px solid var(--c-gold); }
+        .sidebar-footer { padding: 20px 30px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .sidebar-footer a { color: var(--c-gold); text-decoration: none; font-size: 14px; }
+
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .topbar { background-color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--c-border); }
+        .topbar h1 { font-family: 'Montserrat', sans-serif; font-size: 20px; color: var(--c-primary); }
+        .topbar-actions a { color: var(--c-text); text-decoration: none; font-size: 14px; margin-left: 20px; }
+        .topbar-actions a.btn-logout { background-color: #fee2e2; color: #dc2626; padding: 8px 15px; border-radius: 4px; font-weight: 600; }
+
+        .content-area { padding: 40px; flex-grow: 1; max-width: 1200px; margin: 0 auto; width: 100%; }
+        
+        .card { background: white; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); padding: 30px; margin-bottom: 30px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--c-border); }
+        .card-title { font-family: 'Montserrat', sans-serif; font-size: 18px; color: var(--c-primary); }
+        
+        .btn { display: inline-block; padding: 10px 20px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: white; border-radius: 4px; text-decoration: none; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-gold { background-color: var(--c-gold); }
+        .btn-gold:hover { background-color: #c99321; }
+        .btn-navy { background-color: var(--c-primary); }
+        .btn-navy:hover { background-color: var(--c-secondary); }
+        .btn-red { background-color: #ef4444; }
+        .btn-red:hover { background-color: #dc2626; }
+        .btn-sm { padding: 6px 12px; font-size: 11px; margin-right: 5px; }
+
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th, .data-table td { padding: 15px; text-align: left; border-bottom: 1px solid var(--c-border); }
+        .data-table th { font-family: 'Montserrat', sans-serif; font-size: 13px; text-transform: uppercase; color: #64748b; font-weight: 600; }
+        .data-table tr:hover { background-color: #f8fafc; }
+        
+        /* Forms */
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-weight: 500; margin-bottom: 8px; color: var(--c-primary); font-size: 14px; }
+        .form-control { width: 100%; padding: 12px 15px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 15px; transition: 0.3s; }
+        .form-control:focus { outline: none; border-color: var(--c-gold); box-shadow: 0 0 0 3px rgba(225, 171, 54, 0.2); }
+        .form-text { display: block; font-size: 12px; color: #64748b; margin-top: 5px; }
+        .helptext { font-size: 12px; color: #64748b; display: block; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>PEJUNI CMS</h2>
+            <p style="font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px;">Enterprise Dashboard</p>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{% url 'dashboard:home' %}" class="nav-link">Dashboard Overview</a>
+            <a href="{% url 'dashboard:advantages_list' %}" class="nav-link">Manage Advantages</a>
+            <a href="{% url 'dashboard:statistics_list' %}" class="nav-link">Manage Statistics</a>
+            <a href="{% url 'dashboard:projects_list' %}" class="nav-link">Manage Projects</a>
+            <a href="{% url 'dashboard:services_list' %}" class="nav-link">Manage Services</a>
+            <a href="{% url 'dashboard:team_list' %}" class="nav-link">Manage Team</a>
+            <a href="{% url 'dashboard:news_list' %}" class="nav-link">Manage News</a>
+            
+            <div style="margin-top: 30px; margin-bottom: 15px; padding: 0 30px; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Settings</div>
+            <a href="{% url 'dashboard:profile' %}" class="nav-link">My Profile</a>
+            <a href="{% url 'dashboard:profile_password' %}" class="nav-link">Change Password</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/">← Return to Live Site</a>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+        <header class="topbar">
+            <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+            <div class="topbar-actions">
+                <span>Welcome, {{ user.username }}</span>
+                <form action="{% url 'dashboard:logout' %}" method="post" style="display:inline; margin-left:15px;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-red btn-sm">Log Out</button>
+                </form>
+            </div>
+        </header>
+
+        <div class="content-area">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+</body>
+</html>

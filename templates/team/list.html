@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="page-header" style="background-color: var(--c-primary); padding: 160px 0 80px; text-align: center;">
+    <div class="container4">
+        <h1 style="color: white; font-size: 50px;">Meet The Team</h1>
+    </div>
+</section>
+
+<section class="team-area" style="padding: 80px 0;">
+    <div class="container4 text-center">
+        <div class="team-grid4 text-left">
+            {% for member in team_members %}
+            <div class="team-card4" style="text-align: left; transform: translateY(0); opacity: 1;">
+                <a href="{% url 'team:detail' member.pk %}">
+                    <div class="team-img4">{% if member.image %}<img src="{{ member.image.url }}" alt="{{ member.name }}">{% endif %}</div>
+                </a>
+                <div class="team-info4">
+                    <h4>{{ member.name }}</h4>
+                    <p class="team-role4">{{ member.role }}</p>
+                    <a href="{% url 'team:detail' member.pk %}" style="display: inline-block; margin-top: 10px; font-size: 13px; color: var(--c-primary); font-weight: 600;">Read Bio &rarr;</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

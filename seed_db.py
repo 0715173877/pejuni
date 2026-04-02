@@ -13,7 +13,7 @@ from services.models import Service
 from projects.models import Project
 from team.models import TeamMember
 from news.models import Article
-from core.models import Partner, Testimonial
+from core.models import Partner, Testimonial, Statistic
 from django.contrib.auth.models import User
 
 # Acquire superuser for audit trail
@@ -47,6 +47,7 @@ Project.objects.all().delete()
 TeamMember.objects.all().delete()
 Article.objects.all().delete()
 Partner.objects.all().delete()
+Statistic.objects.all().delete()
 
 print("Automatically Seeding Services...")
 Service.objects.create(title="Geotechnical Data Collection", description="Precise core logging is the foundation of structural integrity...", image=save_media("pejun_if0ams.jpg", "services"), order=1, **audit_payload)
@@ -57,9 +58,9 @@ Service.objects.create(title="Geotechnical Engineering", description="We provide
 Service.objects.create(title="Bore Hole & Geophysical Survey", description="Precise surveying and bore hole drilling assessments...", image=save_media("gen_underground_1774697024373.png", "services"), order=6, **audit_payload)
 
 print("Automatically Seeding Projects...")
-Project.objects.create(title="Geita Pit Expansion", description="Advanced numerical modeling and slope evaluation for deep extraction phases.", image=save_media("slope.png", "projects"), order=1, **audit_payload)
-Project.objects.create(title="Bulyanhulu Underground", description="Comprehensive underground stability surveys utilizing deep geophysical boreholes.", image=save_media("gen_open_pit_1774697006529.png", "projects"), order=2, **audit_payload)
-Project.objects.create(title="Kibali Foundation Design", description="Soil and rock mechanic testing resulting in precision structural foundations.", image=save_media("gen_engineering_1774696967271.png", "projects"), order=3, **audit_payload)
+Project.objects.create(title="Geita Pit Expansion", country="Tanzania", description="Advanced numerical modeling and slope evaluation for deep extraction phases.", image=save_media("slope.png", "projects"), order=1, **audit_payload)
+Project.objects.create(title="Bulyanhulu Underground", country="Tanzania", description="Comprehensive underground stability surveys utilizing deep geophysical boreholes.", image=save_media("gen_open_pit_1774697006529.png", "projects"), order=2, **audit_payload)
+Project.objects.create(title="Kibali Foundation Design", country="DR Congo", description="Soil and rock mechanic testing resulting in precision structural foundations.", image=save_media("gen_engineering_1774696967271.png", "projects"), order=3, **audit_payload)
 
 print("Automatically Seeding Team Leadership...")
 TeamMember.objects.create(name="Juma Mgumbwa", role="Director & Principal Geotechnical Engineer", image=save_media("gen_juma_1774698598033.png", "team"), order=1, **audit_payload)
@@ -81,6 +82,12 @@ Partner.objects.create(name="Rio Tinto", logo_domain="https://riotinto.com", ord
 print("Automatically Seeding Testimonials...")
 Testimonial.objects.create(author="Mining Operations Director, Australia", quote="Pejuni provided exceptional geotechnical modeling that drastically improved the safety and yield of our pit expansion. Their team is definitively top-tier.", stars=5, order=1, **audit_payload)
 Testimonial.objects.create(author="HR Director, Tanzania Operations", quote="The training and mentorship our young engineers received from Pejuni was invaluable. They systematically blend theory and real-world underground practice flawlessly.", stars=5, order=2, **audit_payload)
+
+print("Automatically Seeding Parallax Statistics...")
+Statistic.objects.create(value_number="200", value_suffix="+", label="Projects Completed", order=1, **audit_payload)
+Statistic.objects.create(value_number="50", value_suffix="+", label="Expert Engineers", order=2, **audit_payload)
+Statistic.objects.create(value_number="15", value_suffix="Y", label="Years of Authority", order=3, **audit_payload)
+Statistic.objects.create(value_number="100", value_suffix="%", label="Safety Record", order=4, **audit_payload)
 
 print("\n--- BOOM! ---")
 print("SUCCESS: Your PostgreSQL database is now 100% populated with all records!")

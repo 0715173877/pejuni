@@ -5,4 +5,4 @@ from core.admin import AuditAdminMixin
 @admin.register(Service)
 class ServiceAdmin(AuditAdminMixin, admin.ModelAdmin):
     list_display = ('title', 'order', 'updated_at', 'updated_by')
-    ordering = ('order',)
+    search_fields = ('title', 'description', 'full_description')

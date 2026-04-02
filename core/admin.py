@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Partner, Testimonial
+from .models import Partner, Testimonial, Statistic
 
 class AuditAdminMixin:
     readonly_fields = ('created_at', 'updated_at', 'created_by', 'updated_by')
@@ -17,3 +17,7 @@ class PartnerAdmin(AuditAdminMixin, admin.ModelAdmin):
 @admin.register(Testimonial)
 class TestimonialAdmin(AuditAdminMixin, admin.ModelAdmin):
     list_display = ('author', 'stars', 'order', 'updated_at')
+
+@admin.register(Statistic)
+class StatisticAdmin(AuditAdminMixin, admin.ModelAdmin):
+    list_display = ('label', 'value_number', 'value_suffix', 'order', 'updated_at', 'updated_by')

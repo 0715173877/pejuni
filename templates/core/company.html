@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="page-header" style="background-color: var(--c-primary); padding: 160px 0 80px; text-align: center;">
+    <div class="container4">
+        <h1 style="color: white; font-size: 50px;">Corporate Profile</h1>
+    </div>
+</section>
+
+<section class="company-profile" style="padding: 80px 0;">
+    <div class="container4 profile-grid">
+        <div class="profile-text">
+            <h6 class="kicker-heading">THE COMPANY</h6>
+            <h2 class="main-heading">A Leading Partner in the Global Mining Industry.</h2>
+            <p>Pejuni is a dominant provider of specialized technical services in the mining industry. Based in Mwanza, Tanzania with active operations spanning across Australia, DR Congo, Ghana, and South Africa.</p>
+            <p>With an uncompromising commitment to technical expertise and collaborative engineering, we utilize cutting-edge tools and advanced modeling techniques to optimize incredibly complex mining plans and definitively assess ground stability.</p>
+            <div class="profile-btn-group">
+                <a href="https://pejuni.com/PEJUNI%20company%20profile.pdf" target="_blank" class="btn4 btn4-dark">Download Profile PDF</a>
+            </div>
+        </div>
+        <div class="profile-image">
+            <img src="{% static 'choose-img.jpg' %}" alt="Corporate Leadership" style="width: 100%;">
+            <div class="gold-accent-box"></div>
+        </div>
+    </div>
+</section>
+{% endblock %}

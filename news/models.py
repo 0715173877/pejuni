@@ -5,6 +5,7 @@ class Article(AuditModel):
     title = models.CharField(max_length=255)
     date = models.DateField()
     link = models.URLField(blank=True, null=True)
+    content = models.TextField(blank=True, null=True, help_text="Complete article body text.")
     image = models.ImageField(upload_to='news/', blank=True, null=True)
     order = models.IntegerField(default=0)
     

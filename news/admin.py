@@ -4,5 +4,6 @@ from core.admin import AuditAdminMixin
 
 @admin.register(Article)
 class ArticleAdmin(AuditAdminMixin, admin.ModelAdmin):
-    list_display = ('title', 'date', 'order', 'updated_at', 'updated_by')
-    ordering = ('-date',)
+    list_display = ('title', 'date', 'updated_at', 'updated_by')
+    list_filter = ('date',)
+    search_fields = ('title', 'content')

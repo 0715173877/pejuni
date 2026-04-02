@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="page-header" style="background-color: var(--c-primary); padding: 160px 0 80px; text-align: center;">
+    <div class="container4">
+        <h1 style="color: white; font-size: 50px;">{{ member.name }}</h1>
+    </div>
+</section>
+
+<section class="container4" style="padding: 100px 5%; max-width: 1000px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: start;">
+        <div>
+            {% if member.image %}
+            <img src="{{ member.image.url }}" style="width: 100%; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            {% endif %}
+            <h3 style="margin-top: 20px;">{{ member.name }}</h3>
+            <p style="color: var(--c-gold); font-weight: 600; text-transform: uppercase; font-size: 13px;">{{ member.role }}</p>
+        </div>
+        <div>
+            <h4 style="font-size: 26px; border-bottom: 1px solid var(--c-gray); padding-bottom: 15px; margin-bottom: 25px;">Professional Biography</h4>
+            {% if member.bio %}
+            <div style="font-size: 16px; line-height: 1.9; color: var(--c-text-body); white-space: pre-wrap; margin-bottom: 40px;">{{ member.bio }}</div>
+            {% else %}
+            <p style="margin-bottom: 40px;">Biography is currently being updated in the system.</p>
+            {% endif %}
+
+            {% if member.cv %}
+            <div style="margin-top: 20px;">
+                <a href="{{ member.cv.url }}" target="_blank" class="btn4 btn4-primary" style="display: inline-flex; align-items: center; gap: 10px;">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 16l4-5h-3V4h-2v7H8l4 5zm9-1v6H3v-6h2v4h14v-4h2z"/></svg>
+                    Download Curriculum Vitae
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

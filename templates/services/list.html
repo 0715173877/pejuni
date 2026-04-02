@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="page-header" style="background-color: var(--c-primary); padding: 160px 0 80px; text-align: center;">
+    <div class="container4">
+        <h1 style="color: white; font-size: 50px;">Core Capabilities</h1>
+    </div>
+</section>
+
+<section class="expertise-area bg-light-gray" style="padding: 80px 0;">
+    <div class="container4">
+        {% for service in services %}
+        <div class="staggered-block reveal-up active {% if forloop.counter|divisibleby:2 %}st-reverse{% endif %}">
+            <div class="st-img">
+                {% if service.image %}<a href="{% url 'services:detail' service.pk %}"><img src="{{ service.image.url }}" alt="{{ service.title }}"></a>{% endif %}
+            </div>
+            <div class="st-text">
+                <div class="st-num">0{{ forloop.counter }}</div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+                <a href="{% url 'services:detail' service.pk %}" class="arrow-link">Explore Solutions <span class="arrow">&rarr;</span></a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No capabilities configured.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
