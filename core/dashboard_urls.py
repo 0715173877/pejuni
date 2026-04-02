@@ -11,12 +11,19 @@ app_name = 'dashboard'
 
 urlpatterns = [
     path('', DashboardHomeView.as_view(), name='home'),
+    path('hero/', core_dash.ManageHeroView.as_view(), name='hero'),
     path('login/', DashLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='/dashboard/login/'), name='logout'),
 
     # Settings
     path('profile/', core_dash.DashboardProfileView.as_view(), name='profile'),
     path('profile/password/', core_dash.DashboardPasswordChangeView.as_view(), name='profile_password'),
+
+    # Users
+    path('users/', core_dash.DashboardUserListView.as_view(), name='users_list'),
+    path('users/add/', core_dash.DashboardUserCreateView.as_view(), name='users_add'),
+    path('users/<int:pk>/edit/', core_dash.DashboardUserUpdateView.as_view(), name='users_edit'),
+    path('users/<int:pk>/delete/', core_dash.DashboardUserDeleteView.as_view(), name='users_delete'),
 
     # Statistics
     path('statistics/', core_dash.StatisticListView.as_view(), name='statistics_list'),

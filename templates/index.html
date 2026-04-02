@@ -5,12 +5,16 @@
 
     <!-- Parallax Hero -->
     <section class="hero-parallax">
+        {% if hero and hero.background_image %}
+        <div class="hero-bg-img" style="background-image: url('{{ hero.background_image.url }}');"></div>
+        {% else %}
         <div class="hero-bg-img" style="background-image: url('{% static 'gen_hero_rig_1774700954497.png' %}');"></div>
+        {% endif %}
         <div class="hero-gradient-overlay"></div>
         <div class="hero-content4 container4 reveal-up">
-            <h5 class="hero-kicker">MINING & GEOTECHNICAL CONSULTING</h5>
-            <h1 class="hero-title4">Engineering<br>Operational Certainty.</h1>
-            <p class="hero-p4">We deliver practical, highly-specialized geotechnical solutions tailored to your individual operational and risk profile across the world's most demanding sites.</p>
+            <h5 class="hero-kicker">{{ hero.kicker|default:"MINING &amp; GEOTECHNICAL CONSULTING" }}</h5>
+            <h1 class="hero-title4">{% if hero %}{{ hero.title|safe }}{% else %}Engineering<br>Operational Certainty.{% endif %}</h1>
+            <p class="hero-p4">{{ hero.description|default:"We deliver practical, highly-specialized geotechnical solutions tailored to your individual operational and risk profile across the world's most demanding sites." }}</p>
             <div class="hero-actions4">
                 <a href="#expertise" class="btn4 btn4-primary">Discover Our Expertise</a>
             </div>
@@ -25,7 +29,7 @@
     <!-- Introduction Statement (Massive White Space) -->
     <section class="intro-statement">
         <div class="container4 reveal-up">
-            <h2 class="statement-text">Unlocking the potential of mining projects with <span class="text-gold">unparalleled expertise</span> and relentless innovation. Pejuni is your strategic partner in subsurface risk management.</h2>
+            <h2 class="statement-text">{% if hero %}{{ hero.intro_statement|safe }}{% else %}Unlocking the potential of mining projects with <span class="text-gold">unparalleled expertise</span> and relentless innovation. Pejuni is your strategic partner in subsurface risk management.{% endif %}</h2>
         </div>
     </section>
 
@@ -36,7 +40,7 @@
                 <div class="why-title">
                     <h6 class="kicker-heading">THE PEJUNI ADVANTAGE</h6>
                     <h2 class="main-heading">Why Choose Us.</h2>
-                    <p style="font-size: 18px; line-height: 1.8; margin-top: 30px; padding-right: 40px;">When you choose Pejuni, you are selecting a trusted partner that combines specialized expertise, advanced technologies, and an unwavering commitment to safety. We increase the net value of your open-pit or underground project through innovative engineering solutions.</p>
+                    <p style="font-size: 18px; line-height: 1.8; margin-top: 30px; padding-right: 40px;">{{ hero.why_choose_us_intro|default:"When you choose Pejuni, you are selecting a trusted partner that combines specialized expertise, advanced technologies, and an unwavering commitment to safety. We increase the net value of your open-pit or underground project through innovative engineering solutions." }}</p>
                 </div>
                 <div class="why-list">
                     {% for advantage in advantages %}

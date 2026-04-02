@@ -5,8 +5,8 @@ from services.models import Service
 from projects.models import Project
 from team.models import TeamMember
 from news.models import Article
-from core.models import Statistic, Advantage
-from core.forms import StatisticForm, AdvantageForm, UserProfileForm
+from core.models import Statistic, Advantage, HeroContent
+from core.forms import StatisticForm, AdvantageForm, UserProfileForm, HeroContentForm, DashboardUserForm
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -40,11 +40,64 @@ class DashboardProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     def get_object(self, queryset=None):
         return self.request.user
 
+class ManageHeroView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = HeroContent
+    form_class = HeroContentForm
+    template_name = 'dashboard/shared_form.html'
+    success_url = reverse_lazy('dashboard:hero')
+    success_message = "Hero section updated successfully."
+    extra_context = {'title': 'Manage Hero Content'}
+
+    def get_object(self, queryset=None):
+        obj, created = HeroContent.objects.get_or_create(id=1)
+        if created and hasattr(obj, 'created_by'):
+            obj.created_by = self.request.user
+            obj.save()
+        return obj
+
+    def form_valid(self, form):
+        if hasattr(form.instance, 'updated_by'):
+            form.instance.updated_by = self.request.user
+        return super().form_valid(form)
+
 class DashboardPasswordChangeView(LoginRequiredMixin, SuccessMessageMixin, PasswordChangeView):
     template_name = 'dashboard/shared_form.html'
     success_url = reverse_lazy('dashboard:profile')
     success_message = "Your password was updated successfully."
     extra_context = {'title': 'Change Password'}
+
+class DashboardUserListView(LoginRequiredMixin, ListView):
+    model = User
+    template_name = 'dashboard/users/list.html'
+    context_object_name = 'objects'
+
+class DashboardUserCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = User
+    form_class = DashboardUserForm
+    template_name = 'dashboard/shared_form.html'
+    success_url = reverse_lazy('dashboard:users_list')
+    success_message = "User created successfully with default password 'ChangeMe@2026!'."
+    extra_context = {'title': 'Create New User', 'help_msg': 'The user will be automatically assigned the password: ChangeMe@2026!'}
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.set_password('ChangeMe@2026!')
+        user.save()
+        return super().form_valid(form)
+
+class DashboardUserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = User
+    form_class = DashboardUserForm
+    template_name = 'dashboard/shared_form.html'
+    success_url = reverse_lazy('dashboard:users_list')
+    success_message = "User profile updated successfully."
+    extra_context = {'title': 'Edit User'}
+
+class DashboardUserDeleteView(LoginRequiredMixin, DeleteView):
+    model = User
+    template_name = 'dashboard/shared_confirm_delete.html'
+    success_url = reverse_lazy('dashboard:users_list')
+    extra_context = {'title': 'Delete User Account'}
 
 class StatisticListView(LoginRequiredMixin, ListView):
     model = Statistic

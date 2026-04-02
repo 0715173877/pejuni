@@ -3,7 +3,7 @@ from services.models import Service
 from projects.models import Project
 from team.models import TeamMember
 from news.models import Article
-from core.models import Partner, Testimonial, Statistic, Advantage
+from core.models import Partner, Testimonial, Statistic, Advantage, HeroContent
 
 def home(request):
     context = {
@@ -15,6 +15,7 @@ def home(request):
         'testimonials': Testimonial.objects.all(),
         'statistics': Statistic.objects.all(),
         'advantages': Advantage.objects.all(),
+        'hero': HeroContent.objects.first(),
         'location_tags': [cat for cat in Project.objects.order_by().values_list('country', flat=True).distinct() if cat][:6],
     }
     return render(request, 'index.html', context)
