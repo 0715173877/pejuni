@@ -38,6 +38,8 @@ img { max-width: 100%; display: block; object-fit: cover; }
 .btn4-dark:hover { background-color: var(--c-secondary); transform: translateY(-3px); }
 .btn4-outline { border-color: var(--c-white); color: var(--c-white); background: transparent; }
 .btn4-outline:hover { background-color: var(--c-white); color: var(--c-primary); }
+.btn4-outline-dark { border-color: var(--c-primary); color: var(--c-primary); background: transparent; }
+.btn4-outline-dark:hover { background-color: var(--c-primary); color: var(--c-white); }
 
 /* Header & Nav */
 .header4 { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 30px 0; transition: var(--transition-smooth); }
@@ -178,16 +180,31 @@ img { max-width: 100%; display: block; object-fit: cover; }
 .pb-content4 p { font-size: 15px; color: var(--c-text-body); }
 
 /* Clients Area */
-.clients-area { padding: 120px 0; border-top: 1px solid var(--c-gray); }
-.clients-flex4 { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 60px; opacity: 0.6; }
+.clients-area { padding: 120px 0; border-top: 1px solid var(--c-gray); overflow: hidden; }
+.clients-marquee { width: 100%; position: relative; display: flex; overflow: hidden; }
+.clients-marquee::before, .clients-marquee::after { content: ''; position: absolute; top:0; width: 100px; height: 100%; z-index:2; }
+.clients-marquee::before { left: 0; background: linear-gradient(to right, var(--c-white), transparent); }
+.clients-marquee::after { right: 0; background: linear-gradient(to left, var(--c-white), transparent); }
+.clients-track { display: flex; width: max-content; align-items: center; gap: 80px; padding: 20px 0; animation: scrollRightToLeft 25s linear infinite; opacity: 0.6; }
+.clients-track:hover { animation-play-state: paused; opacity: 1; transition: opacity 0.4s; }
 .client-logo4 { display: flex; align-items: center; justify-content: center; }
 .client-logo4 img { height: 45px; max-width: 150px; opacity: 0.5; filter: grayscale(100%); transition: all 0.4s ease; cursor: pointer; }
 .client-logo4 img:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.08) translateY(-3px); }
 
+@keyframes scrollRightToLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 40px)); }
+}
+
 /* Testimonials */
-.testimonials-area { padding: 120px 0; }
-.testimonials-grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; }
-.testimonial-card4 { background-color: var(--c-white); padding: 50px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.03); position: relative; }
+.testimonials-area { padding: 120px 0; overflow: hidden; }
+.testimonials-marquee { width: 100%; position: relative; overflow: hidden; padding: 20px 0; }
+.testimonials-marquee::before, .testimonials-marquee::after { content: ''; position: absolute; top:0; width: 150px; height: 100%; z-index:2; pointer-events: none; }
+.testimonials-marquee::before { left: 0; background: linear-gradient(to right, var(--c-light-gray), transparent); }
+.testimonials-marquee::after { right: 0; background: linear-gradient(to left, var(--c-light-gray), transparent); }
+.testimonials-track { display: flex; width: max-content; gap: 40px; animation: scrollRightToLeft 40s linear infinite; }
+.testimonials-track:hover { animation-play-state: paused; }
+.testimonial-card4 { background-color: var(--c-white); padding: 50px; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.03); position: relative; text-align: left; width: 450px; min-width: 450px; white-space: normal; }
 .star-rating4 { color: var(--c-gold); font-size: 20px; margin-bottom: 25px; letter-spacing: 2px; }
 .test-body4 { font-size: 18px; color: var(--c-text-dark); font-style: italic; line-height: 1.8; margin-bottom: 30px; }
 .test-author4 { font-size: 15px; color: var(--c-primary); text-transform: uppercase; letter-spacing: 1px; }
@@ -260,7 +277,8 @@ img { max-width: 100%; display: block; object-fit: cover; }
     .stat-box4 { width: 40%; }
     .why-grid4 { grid-template-columns: 1fr; }
     .why-title { position: static; }
-    .projects-grid4, .news-grid4, .testimonials-grid4, .team-grid4 { grid-template-columns: 1fr; gap: 40px; }
+    .projects-grid4, .news-grid4, .team-grid4 { grid-template-columns: 1fr; gap: 40px; }
+    .testimonial-card4 { width: 350px; min-width: 350px; }
 }
 @media (max-width: 768px) {
     .mobile-toggle4 { display: flex; flex-direction: column; justify-content: space-between; width: 30px; height: 21px; cursor: pointer; z-index: 2000; }
