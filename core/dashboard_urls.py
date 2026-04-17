@@ -12,6 +12,7 @@ app_name = 'dashboard'
 urlpatterns = [
     path('', DashboardHomeView.as_view(), name='home'),
     path('hero/', core_dash.ManageHeroView.as_view(), name='hero'),
+    path('footer/', core_dash.ManageFooterView.as_view(), name='footer'),
     path('login/', DashLoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page='/dashboard/login/'), name='logout'),
 
@@ -60,4 +61,19 @@ urlpatterns = [
     path('news/add/', ArticleCreateView.as_view(), name='news_add'),
     path('news/<int:pk>/edit/', ArticleUpdateView.as_view(), name='news_edit'),
     path('news/<int:pk>/delete/', ArticleDeleteView.as_view(), name='news_delete'),
+
+    # Partners
+    path('partners/', core_dash.PartnerListView.as_view(), name='partners_list'),
+    path('partners/add/', core_dash.PartnerCreateView.as_view(), name='partners_add'),
+    path('partners/<int:pk>/edit/', core_dash.PartnerUpdateView.as_view(), name='partners_edit'),
+    path('partners/<int:pk>/delete/', core_dash.PartnerDeleteView.as_view(), name='partners_delete'),
+
+    # Testimonials
+    path('testimonials/', core_dash.TestimonialListView.as_view(), name='testimonials_list'),
+    path('testimonials/add/', core_dash.TestimonialCreateView.as_view(), name='testimonials_add'),
+    path('testimonials/<int:pk>/edit/', core_dash.TestimonialUpdateView.as_view(), name='testimonials_edit'),
+    path('testimonials/<int:pk>/delete/', core_dash.TestimonialDeleteView.as_view(), name='testimonials_delete'),
+
+    # Footer
+    path('footer/', core_dash.ManageFooterView.as_view(), name='footer'),
 ]

@@ -144,13 +144,18 @@
                 {% endfor %}
             </div>
 
-            <div class="projects-grid4 mt-60 reveal-up">
+            <div class="slider-controls" style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 10px; margin-bottom: 25px; align-items: center;">
+                <button class="slide-prev" onclick="slideProjects(-1)" style="width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--c-primary); background: transparent; color: var(--c-primary); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; transition: 0.3s;">&larr;</button>
+                <button class="slide-next" onclick="slideProjects(1)" style="width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--c-primary); background: var(--c-primary); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; transition: 0.3s;">&rarr;</button>
+            </div>
+
+            <div class="projects-grid4 reveal-up" id="projectSliderContainer" style="scroll-behavior: smooth;">
                 {% for project in projects %}
                 <div class="project-box4">
                     {% if project.image %}<img src="{{ project.image.url }}" alt="{{ project.title }}">{% endif %}
                     <div class="pb-content4">
                         <h4>{{ project.title }}</h4>
-                        {% if project.country %}<a href="{% url 'dashboard:projects_edit' project.pk %}" style="display: inline-block; color: var(--c-gold); font-size: 13px; font-weight: 600; text-transform: uppercase; margin-bottom: 5px; text-decoration: none; border-bottom: 1px dashed var(--c-gold);">{{ project.country }} <span style="font-size: 10px;">✎</span></a>{% endif %}
+                        {% if project.country %}<span style="display: inline-block; color: var(--c-gold); font-size: 13px; font-weight: 600; text-transform: uppercase; margin-bottom: 5px;">{{ project.country }}</span>{% endif %}
                         <p>{{ project.description }}</p>
                         <a href="{% url 'projects:detail' project.pk %}" style="display: inline-block; margin-top: 15px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--c-primary); border-bottom: 1px solid var(--c-primary); padding-bottom: 3px; transition: color 0.3s; cursor: pointer;">Read Project Details <span style="margin-left:5px;">&rarr;</span></a>
                     </div>
@@ -159,6 +164,46 @@
                 <p>No projects currently configured.</p>
                 {% endfor %}
             </div>
+
+            <script>
+                function slideProjects(direction) {
+                    const container = document.getElementById('projectSliderContainer');
+                    const firstItem = container.querySelector('.project-box4');
+                    if (firstItem) {
+                        const itemWidth = firstItem.offsetWidth + 40; // width + gap
+                        // Scroll by 1 project at a time for a smoother "slide in" effect
+                        container.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+                    }
+                }
+                
+                // Add auto-sliding functionality
+                let autoSlideInterval;
+                function startAutoSlide() {
+                    autoSlideInterval = setInterval(() => {
+                        const container = document.getElementById('projectSliderContainer');
+                        if (!container) return;
+                        
+                        // Check if we are at the end
+                        const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
+                        if (isAtEnd) {
+                            // Go back to the beginning
+                            container.scrollTo({ left: 0, behavior: 'smooth' });
+                        } else {
+                            slideProjects(1);
+                        }
+                    }, 4000); // Slide every 4 seconds
+                }
+
+                // Start auto-slide and pause on hover
+                document.addEventListener('DOMContentLoaded', () => {
+                    startAutoSlide();
+                    const container = document.getElementById('projectSliderContainer');
+                    if (container) {
+                        container.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+                        container.addEventListener('mouseleave', startAutoSlide);
+                    }
+                });
+            </script>
         </div>
     </section>
 

@@ -1,0 +1,37 @@
+{% extends "dashboard/base_dash.html" %}
+{% block page_title %}Manage Partners{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Partners</h2>
+        <a href="{% url 'dashboard:partners_add' %}" class="btn btn-navy">+ Add New Partner</a>
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 50px;">ID</th>
+                <th>Name</th>
+                <th>Logo Domain</th>
+                <th style="width: 150px;">Order</th>
+                <th style="width: 200px; text-align: right;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in objects %}
+            <tr>
+                <td style="color: #64748b;">#{{ obj.pk }}</td>
+                <td style="font-weight: 500;">{{ obj.name }}</td>
+                <td>{{ obj.logo_domain }}</td>
+                <td>{{ obj.order }}</td>
+                <td style="text-align: right;">
+                    <a href="{% url 'dashboard:partners_edit' obj.pk %}" class="btn btn-gold btn-sm">Edit</a>
+                    <a href="{% url 'dashboard:partners_delete' obj.pk %}" class="btn btn-red btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" style="text-align:center;">No partners registered.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

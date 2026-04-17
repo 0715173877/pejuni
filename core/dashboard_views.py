@@ -5,8 +5,8 @@ from services.models import Service
 from projects.models import Project
 from team.models import TeamMember
 from news.models import Article
-from core.models import Statistic, Advantage, HeroContent
-from core.forms import StatisticForm, AdvantageForm, UserProfileForm, HeroContentForm, DashboardUserForm
+from core.models import Statistic, Advantage, HeroContent, FooterContent, Partner, Testimonial
+from core.forms import StatisticForm, AdvantageForm, UserProfileForm, HeroContentForm, DashboardUserForm, FooterContentForm, PartnerForm, TestimonialForm
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -50,6 +50,46 @@ class ManageHeroView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def get_object(self, queryset=None):
         obj, created = HeroContent.objects.get_or_create(id=1)
+        if created and hasattr(obj, 'created_by'):
+            obj.created_by = self.request.user
+            obj.save()
+        return obj
+
+    def form_valid(self, form):
+        if hasattr(form.instance, 'updated_by'):
+            form.instance.updated_by = self.request.user
+        return super().form_valid(form)
+
+class ManageFooterView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = FooterContent
+    form_class = FooterContentForm
+    template_name = 'dashboard/shared_form.html'
+    success_url = reverse_lazy('dashboard:footer')
+    success_message = "Footer section updated successfully."
+    extra_context = {'title': 'Manage Footer Content'}
+
+    def get_object(self, queryset=None):
+        obj, created = FooterContent.objects.get_or_create(id=1)
+        if created and hasattr(obj, 'created_by'):
+            obj.created_by = self.request.user
+            obj.save()
+        return obj
+
+    def form_valid(self, form):
+        if hasattr(form.instance, 'updated_by'):
+            form.instance.updated_by = self.request.user
+        return super().form_valid(form)
+
+class ManageFooterView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = FooterContent
+    form_class = FooterContentForm
+    template_name = 'dashboard/shared_form.html'
+    success_url = reverse_lazy('dashboard:footer')
+    success_message = "Global footer configuration updated successfully."
+    extra_context = {'title': 'Manage Footer Configuration'}
+
+    def get_object(self, queryset=None):
+        obj, created = FooterContent.objects.get_or_create(id=1)
         if created and hasattr(obj, 'created_by'):
             obj.created_by = self.request.user
             obj.save()
@@ -188,4 +228,95 @@ class AdvantageDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'dashboard/shared_confirm_delete.html'
     success_url = reverse_lazy('dashboard:advantages_list')
     extra_context = {'title': 'Delete Advantage'}
+
+class PartnerListView(LoginRequiredMixin, ListView):
+    model = Partner
+    template_name = 'dashboard/partners/list.html'
+    context_object_name = 'objects'
+
+class PartnerCreateView(LoginRequiredMixin, CreateView):
+    model = Partner
+    form_class = PartnerForm
+    template_name = 'dashboard/shared_form.html'
+    extra_context = {'title': 'Create Partner'}
+
+    def get_success_url(self):
+        if '_save_and_preview' in self.request.POST:
+            return reverse_lazy('core:home')
+        return reverse_lazy('dashboard:partners_list')
+
+    def form_valid(self, form):
+        if hasattr(form.instance, 'created_by'):
+            form.instance.created_by = self.request.user
+        if hasattr(form.instance, 'updated_by'):
+            form.instance.updated_by = self.request.user
+        return super().form_valid(form)
+
+class PartnerUpdateView(LoginRequiredMixin, UpdateView):
+    model = Partner
+    form_class = PartnerForm
+    template_name = 'dashboard/shared_form.html'
+    extra_context = {'title': 'Edit Partner'}
+
+    def get_success_url(self):
+        if '_save_and_preview' in self.request.POST:
+            return reverse_lazy('core:home')
+        return reverse_lazy('dashboard:partners_list')
+
+    def form_valid(self, form):
+        if hasattr(form.instance, 'updated_by'):
+            form.instance.updated_by = self.request.user
+        return super().form_valid(form)
+
+class PartnerDeleteView(LoginRequiredMixin, DeleteView):
+    model = Partner
+    template_name = 'dashboard/shared_confirm_delete.html'
+    success_url = reverse_lazy('dashboard:partners_list')
+    extra_context = {'title': 'Delete Partner'}
+
+class TestimonialListView(LoginRequiredMixin, ListView):
+    model = Testimonial
+    template_name = 'dashboard/testimonials/list.html'
+    context_object_name = 'objects'
+
+class TestimonialCreateView(LoginRequiredMixin, CreateView):
+    model = Testimonial
+    form_class = TestimonialForm
+    template_name = 'dashboard/shared_form.html'
+    extra_context = {'title': 'Create Testimonial'}
+
+    def get_success_url(self):
+        if '_save_and_preview' in self.request.POST:
+            return reverse_lazy('core:home')
+        return reverse_lazy('dashboard:testimonials_list')
+
+    def form_valid(self, form):
+        if hasattr(form.instance, 'created_by'):
+            form.instance.created_by = self.request.user
+        if hasattr(form.instance, 'updated_by'):
+            form.instance.updated_by = self.request.user
+        return super().form_valid(form)
+
+class TestimonialUpdateView(LoginRequiredMixin, UpdateView):
+    model = Testimonial
+    form_class = TestimonialForm
+    template_name = 'dashboard/shared_form.html'
+    extra_context = {'title': 'Edit Testimonial'}
+
+    def get_success_url(self):
+        if '_save_and_preview' in self.request.POST:
+            return reverse_lazy('core:home')
+        return reverse_lazy('dashboard:testimonials_list')
+
+    def form_valid(self, form):
+        if hasattr(form.instance, 'updated_by'):
+            form.instance.updated_by = self.request.user
+        return super().form_valid(form)
+
+class TestimonialDeleteView(LoginRequiredMixin, DeleteView):
+    model = Testimonial
+    template_name = 'dashboard/shared_confirm_delete.html'
+    success_url = reverse_lazy('dashboard:testimonials_list')
+    extra_context = {'title': 'Delete Testimonial'}
+
 

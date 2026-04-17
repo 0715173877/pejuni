@@ -171,8 +171,9 @@ img { max-width: 100%; display: block; object-fit: cover; }
 .tag4 { font-family: var(--f-heading); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 10px 24px; border: 1px solid var(--c-primary); color: var(--c-primary); border-radius: 50px; transition: var(--transition-smooth); }
 .tag4:hover { background-color: var(--c-primary); color: var(--c-white); }
 
-.projects-grid4 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-.project-box4 { background-color: var(--c-white); border-radius: 4px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.03); transition: transform 0.4s; }
+.projects-grid4 { display: flex; flex-wrap: nowrap; gap: 40px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px; scrollbar-width: none; }
+.projects-grid4::-webkit-scrollbar { display: none; }
+.project-box4 { flex: 0 0 calc(33.333% - 27px); scroll-snap-align: start; background-color: var(--c-white); border-radius: 4px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.03); transition: transform 0.4s; }
 .project-box4:hover { transform: translateY(-10px); box-shadow: 0 25px 50px rgba(0,0,0,0.08); }
 .project-box4 img { height: 260px; width: 100%; object-fit: cover; object-position: center top; }
 .pb-content4 { padding: 30px; }
@@ -277,7 +278,8 @@ img { max-width: 100%; display: block; object-fit: cover; }
     .stat-box4 { width: 40%; }
     .why-grid4 { grid-template-columns: 1fr; }
     .why-title { position: static; }
-    .projects-grid4, .news-grid4, .team-grid4 { grid-template-columns: 1fr; gap: 40px; }
+    .news-grid4, .team-grid4 { grid-template-columns: 1fr; gap: 40px; }
+    .project-box4 { flex: 0 0 calc(50% - 20px); }
     .testimonial-card4 { width: 350px; min-width: 350px; }
 }
 @media (max-width: 768px) {
@@ -301,5 +303,6 @@ img { max-width: 100%; display: block; object-fit: cover; }
     .cta-massive h2 { font-size: 32px; }
     .cta-buttons { flex-direction: column; padding: 0 5%; }
     .footer-grid4 { grid-template-columns: 1fr; }
+    .project-box4 { flex: 0 0 100%; }
     .stat-box4 { width: 100%; }
 }

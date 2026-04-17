@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{% static 'pejunlogo.png' %}">
-    <link rel="stylesheet" href="{% static 'style4.css' %}?v=1.1">
+    <link rel="stylesheet" href="{% static 'style4.css' %}?v=1.2">
 </head>
 <body>
 
@@ -52,7 +52,7 @@
             <div class="cta-massive reveal-up">
                 <h2>Ready to discuss your next project?</h2>
                 <div class="cta-buttons">
-                    <a href="mailto:admin@pejuni.com" class="btn4 btn4-primary">Email Our Team</a>
+                    <a href="mailto:{{ footer_data.email_primary|default:'admin@pejuni.com' }}" class="btn4 btn4-primary">Email Our Team</a>
                     <a href="https://wa.link/c1wql7" class="btn4 btn4-outline">Chat on WhatsApp</a>
                 </div>
             </div>
@@ -60,31 +60,31 @@
             <div class="footer-grid4">
                 <div class="fg-col fg-brand">
                     <img src="{% static 'pejunlogo.png' %}" alt="Pejuni Logo">
-                    <p>Engineering stability. Ensuring operational excellence. Pejuni Resources.</p>
+                    <p>{{ footer_data.company_description|default:'Engineering stability. Ensuring operational excellence. Pejuni Resources.' }}</p>
                 </div>
                 <div class="fg-col">
                     <h4 class="fg-title">Global Offices</h4>
                     <ul class="fg-list">
-                        <li><strong>Tanzania (HQ)</strong><br>Mwanza, Tanzania<br>+255 759 199 623</li>
-                        <li class="li-mt"><strong>Australia</strong><br>+61 470 578 151</li>
+                        <li><strong>Tanzania (HQ)</strong><br>{{ footer_data.address_hq|default:'Mwanza, Tanzania'|linebreaksbr }}<br>{{ footer_data.phone_hq|default:'+255 759 199 623' }}</li>
+                        <li class="li-mt"><strong>Australia</strong><br>{{ footer_data.phone_aus|default:'+61 470 578 151' }}</li>
                     </ul>
                 </div>
                 <div class="fg-col">
                     <h4 class="fg-title">Expertise</h4>
                     <ul class="fg-list links-list">
-                        <li><a href="#">Geotechnical Data</a></li>
-                        <li><a href="#">Slope Stability</a></li>
-                        <li><a href="#">Soil Lab Testing</a></li>
-                        <li><a href="#">Mentorship & Training</a></li>
+                        <li><a href="/#expertise">Geotechnical Data</a></li>
+                        <li><a href="/#expertise">Slope Stability</a></li>
+                        <li><a href="/#expertise">Soil Lab Testing</a></li>
+                        <li><a href="/#expertise">Mentorship &amp; Training</a></li>
                     </ul>
                 </div>
                 <div class="fg-col">
                     <h4 class="fg-title">Connect</h4>
                     <ul class="fg-list links-list">
-                        <li><a href="mailto:admin@pejuni.com">admin@pejuni.com</a></li>
-                        <li><a href="mailto:info@pejuni.com">info@pejuni.com</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Twitter</a></li>
+                        <li><a href="mailto:{{ footer_data.email_primary|default:'admin@pejuni.com' }}">{{ footer_data.email_primary|default:'admin@pejuni.com' }}</a></li>
+                        <li><a href="mailto:{{ footer_data.email_secondary|default:'info@pejuni.com' }}">{{ footer_data.email_secondary|default:'info@pejuni.com' }}</a></li>
+                        {% if footer_data.linkedin_url and footer_data.linkedin_url != '#' %}<li><a href="{{ footer_data.linkedin_url }}" target="_blank">LinkedIn</a></li>{% else %}<li><a href="#">LinkedIn</a></li>{% endif %}
+                        {% if footer_data.twitter_url and footer_data.twitter_url != '#' %}<li><a href="{{ footer_data.twitter_url }}" target="_blank">Twitter</a></li>{% else %}<li><a href="#">Twitter</a></li>{% endif %}
                     </ul>
                 </div>
             </div>
